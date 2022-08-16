@@ -53,9 +53,9 @@ func Init() {
 	LoadPath(file)
 
 	//mysql读
-	pathRead := strings.Join([]string{DBUser, ":", DBPassword, "@tcp(", DBHost, ":", DBPort, ")/", DBName, "?charset=utf8mb4&parseTime=ture"}, "")
+	pathRead := strings.Join([]string{DBUser, ":", DBPassword, "@tcp(", DBHost, ":", DBPort, ")/", DBName, "?charset=utf8mb4&parseTime=true"}, "")
 	//mysql写的
-	pathWrite := strings.Join([]string{DBUser, ":", DBPassword, "@tcp(", DBHost, ":", DBPort, ")/", DBName, "?charset=utf8mb4&parseTime=ture"}, "")
+	pathWrite := strings.Join([]string{DBUser, ":", DBPassword, "@tcp(", DBHost, ":", DBPort, ")/", DBName, "?charset=utf8mb&parseTime=true"}, "")
 
 	dao.Database(pathRead, pathWrite)
 }

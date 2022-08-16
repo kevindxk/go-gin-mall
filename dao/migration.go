@@ -14,7 +14,7 @@ import (
 )
 
 func Migration() {
-	err := _db.Set("gorm:table_optoons", "charset=utf8mb4").AutoMigrate(
+	err := _db.Set("gorm:table_options", "charset=utf8mb4").AutoMigrate(
 		&model.User{},
 		&model.Carousel{},
 		&model.Cart{},

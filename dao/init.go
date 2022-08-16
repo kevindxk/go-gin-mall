@@ -43,7 +43,7 @@ func Database(connRead, connWrite string) {
 		},
 	})
 	if err != nil {
-		return
+		panic(err)
 	}
 	sqlDB, _ := db.DB()
 	sqlDB.SetMaxIdleConns(20)
