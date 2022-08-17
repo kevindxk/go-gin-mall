@@ -10,8 +10,11 @@ package main
 
 import (
 	"ginmall/conf"
+	"ginmall/router"
 )
 
 func main() {
 	conf.Init()
+	r := router.NewRouter()
+	r.Run(conf.HttpPort)
 }
