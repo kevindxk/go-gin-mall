@@ -14,4 +14,7 @@ const (
 	InvalidParams       = 400
 	ErrorExistUser      = 30001
 	ErrorFailEncryption = 30002
+	ErrorUserNotFond    = 30003
+	ErrorNotCompare     = 30004
+	ErrorAuthToken      = 30005
 )

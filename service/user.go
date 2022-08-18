@@ -15,6 +15,7 @@ import (
 	"ginmall/pkg/c"
 	"ginmall/serializer"
 	"ginmall/utils"
+	logging "github.com/sirupsen/logrus"
 )
 
 type UserServer struct {
@@ -24,6 +25,7 @@ type UserServer struct {
 	Key      string `json:"nick_name" from :"key"`
 }
 
+//用户注册
 func (server *UserServer) Register(ctx context.Context) serializer.Response {
 	var user model.User
 	code := c.Success
@@ -76,6 +78,42 @@ func (server *UserServer) Register(ctx context.Context) serializer.Response {
 	}
 	return serializer.Response{
 		Status: code,
+		Msg:    c.GetMsg(code),
+	}
+}
+
+//用户登录
+func (server *UserServer) Login(ctx context.Context) serializer.Response {
+	code := c.Success
+	userDao := dao.NewUserDao(ctx)
+	user, exist, err := userDao.ExistOrNotByUserName(server.UserName)
+	if !exist {
+		logging.Info(err)
+		code = c.ErrorUserNotFond
+		return serializer.Response{
+			Status: code,
+			Msg:    c.GetMsg(code),
+		}
+	}
+	if user.CheckPassword(server.Password) == false {
+		code = c.ErrorNotCompare
+		return serializer.Response{
+			Status: code,
+			Msg:    c.GetMsg(code),
+		}
+	}
+	token, err := utils.GenerateToken(user.ID, server.UserName, 0)
+	if err != nil {
+		logging.Info(err)
+		code = c.ErrorAuthToken
+		return serializer.Response{
+			Status: code,
+			Msg:    c.GetMsg(code),
+		}
+	}
+	return serializer.Response{
+		Status: code,
+		Data:   serializer.TokenData{User: serializer.BuildUser(user), Token: token},
 		Msg:    c.GetMsg(code),
 	}
 }

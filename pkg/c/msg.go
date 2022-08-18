@@ -14,6 +14,9 @@ var MsgFlags = map[int]string{
 	InvalidParams:       "参数错误",
 	ErrorExistUser:      "用户名已经存在",
 	ErrorFailEncryption: "密码加密失败",
+	ErrorUserNotFond:    "用户不存在",
+	ErrorNotCompare:     "密码错误",
+	ErrorAuthToken:      "Token错误",
 }
 
 func GetMsg(code int) string {

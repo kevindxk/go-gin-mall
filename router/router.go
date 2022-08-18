@@ -24,7 +24,8 @@ func NewRouter() *gin.Engine {
 		v1.GET("ping", func(c *gin.Context) {
 			c.JSON(200, "succcess")
 		})
-		v1.POST("user/regist", api.UserRegister)
+		v1.POST("user/register", api.UserRegister)
+		v1.GET("user/login", api.UserLogin)
 	}
 	return r
 }
