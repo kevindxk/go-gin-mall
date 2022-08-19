@@ -11,6 +11,7 @@ package api
 import (
 	"fmt"
 	"ginmall/service"
+	"ginmall/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -30,6 +31,18 @@ func UserLogin(c *gin.Context) {
 	var userLogin service.UserServer
 	if err := c.ShouldBind(&userLogin); err == nil {
 		res := userLogin.Login(c.Request.Context())
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusBadRequest, err)
+	}
+}
+
+func UserUpdate(c *gin.Context) {
+	var userUpdate service.UserServer
+	//验证token
+	claims, _ := utils.ParseToken(c.GetHeader("Authorization"))
+	if err := c.ShouldBind(&userUpdate); err == nil {
+		res := userUpdate.Update(c.Request.Context(), claims.ID)
 		c.JSON(http.StatusOK, res)
 	} else {
 		c.JSON(http.StatusBadRequest, err)

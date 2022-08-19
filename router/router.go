@@ -27,5 +27,12 @@ func NewRouter() *gin.Engine {
 		v1.POST("user/register", api.UserRegister)
 		v1.GET("user/login", api.UserLogin)
 	}
+
+	authed := v1.Group("/")
+	//authed.Use(middlerware.JWT())
+	{
+		authed.PUT("/update", api.UserUpdate)
+	}
+
 	return r
 }
