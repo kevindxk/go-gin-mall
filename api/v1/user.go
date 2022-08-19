@@ -48,3 +48,15 @@ func UserUpdate(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, err)
 	}
 }
+
+func SendEmail(c *gin.Context) {
+	var sendEmailServer service.SendEmailService
+	//验证token
+	claims, _ := utils.ParseToken(c.GetHeader("Authorization"))
+	if err := c.ShouldBind(&sendEmailServer); err == nil {
+		res := sendEmailServer.Send(c.Request.Context(), claims.ID)
+		c.JSON(http.StatusOK, res)
+	} else {
+		c.JSON(http.StatusBadRequest, err)
+	}
+}

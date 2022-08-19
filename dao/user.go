@@ -57,6 +57,6 @@ func (dao *UserDao) GetUserById(id uint) (user model.User, err error) {
 }
 
 // UpdateUserById 根据 id 更新用户信息
-func (dao *UserDao) UpdateUserById(id uint, user *model.User) (err error) {
+func (dao *UserDao) UpdateUserById(id uint, user model.User) (err error) {
 	return dao.DB.Model(&model.User{}).Where("id=?", id).Updates(&user).Error
 }

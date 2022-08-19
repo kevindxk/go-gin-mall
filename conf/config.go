@@ -30,7 +30,7 @@ var (
 	RedisPw     string
 	RedisDbName string
 
-	valisEmail string
+	ValidEmail string
 	SmtpHost   string
 	SmtpEmail  string
 	SmtpPass   string
@@ -83,7 +83,7 @@ func LoadRedis(file *ini.File) {
 }
 
 func LoadEmail(file *ini.File) {
-	valisEmail = file.Section("email").Key("valisEmail").String()
+	ValidEmail = file.Section("email").Key("ValidEmail").String()
 	SmtpHost = file.Section("email").Key("SmtpHost").String()
 	SmtpEmail = file.Section("email").Key("SmtpEmail").String()
 	SmtpPass = file.Section("email").Key("SmtpPass").String()
